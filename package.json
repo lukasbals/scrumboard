@@ -43,8 +43,11 @@
   },
   "dependencies": {
     "next": "latest",
+    "pg": "^8.5.0",
+    "pg-hstore": "^2.3.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.5",
