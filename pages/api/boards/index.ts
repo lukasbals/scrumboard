@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Board from '../../../api/models/Board';
+import { boardNameRegex } from '../../../constants';
 
 export default async (
   req: NextApiRequest,
@@ -15,8 +16,7 @@ export default async (
     case 'POST':
       await Board.sync();
       try {
-        const regex = /^[a-z](:?[a-z0-9-]{0,61}[a-z0-9])?$/;
-        if (regex.test(req.body.name)) {
+        if (boardNameRegex.test(req.body.name)) {
           const board = await Board.create(req.body);
           res.status(200).json(board);
         } else {

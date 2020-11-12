@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "antd": "^4.8.2",
     "next": "latest",
     "pg": "^8.5.0",
     "pg-hstore": "^2.3.3",
