@@ -18,7 +18,7 @@ export default async (
       try {
         if (boardNameRegex.test(req.body.name)) {
           const board = await Board.create(req.body);
-          res.status(200).json(board);
+          res.status(202).json(board);
         } else {
           res.status(400).json({ message: 'Board name is not URL safe' });
         }
