@@ -16,8 +16,13 @@ body {
   font-size: 20px;
   color: #1890ff;
   margin-left: 8px;
-}
+  transition: transform ease 0.2s;
 
-.anticon:first-of-type {
-  margin-left: 0;
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:hover {
+    transform: sclae(1.5) !important;
+  }
 }

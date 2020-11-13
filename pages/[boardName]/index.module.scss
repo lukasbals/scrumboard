@@ -1,11 +1,20 @@
+.tableContainer {
+  overflow: scroll;
+  width: 100vw;
+  height: 100vh;
+  padding: 24px;
+}
+
 .table {
   width: calc(100vw - 48px);
-  margin: 24px;
+  min-width: 900px;
 
-  & th:first-of-type {
-    width: 240px;
+  & th,
+  td {
+    min-width: 164px;
   }
-  & td:first-of-type {
+  & th:first-of-type,
+  td:first-of-type {
     width: 240px;
   }
 
@@ -35,4 +44,11 @@
   background-color: rgba(0, 0, 0, 0.8);
   float: left;
   margin-right: 8px;
+}
+
+.tdContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-self: flex-start;
 }

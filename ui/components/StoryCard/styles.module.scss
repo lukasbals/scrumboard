@@ -1,18 +1,41 @@
 .storyContainer {
-  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.actionContainer {
+.storyBody {
+  padding: 16px;
+  min-height: 104px;
+}
+
+.divider {
+  margin: 0;
+}
+
+.storyFooter {
+  padding: 0 16px 16px 16px;
+}
+
+.actionsContainer {
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
 }
 
 .unstyledButton {
-  padding: 0 8px 0 0;
+  padding: 0;
+  margin: 0 8px 0 0;
+  border: hidden;
+  height: 20px;
+  width: 20px;
 }
 
-.firstFormItem {
-  margin-bottom: 8px;
+.formItem {
+  margin: 8px 0 0 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
 }

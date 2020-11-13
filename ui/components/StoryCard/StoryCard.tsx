@@ -26,15 +26,19 @@ const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
   };
 
   return (
-    <div className={styles.storyContainer}>
-      <Form initialValues={story} onFinish={onSubmit} form={form}>
+    <Form
+      initialValues={story}
+      onFinish={onSubmit}
+      form={form}
+      className={styles.storyContainer}
+    >
+      <div className={styles.storyBody}>
         {edit ? (
           <>
-            <Form.Item name="name" className={styles.firstFormItem}>
+            <Form.Item name="name" className={styles.formItem}>
               <Input />
             </Form.Item>
-
-            <Form.Item name="link">
+            <Form.Item name="link" className={styles.formItem}>
               <Input />
             </Form.Item>
           </>
@@ -48,9 +52,11 @@ const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
             </a>
           </>
         )}
+      </div>
 
-        <Divider />
-        <div className={styles.actionContainer}>
+      <div className={styles.storyFooter}>
+        <Divider className={styles.divider} />
+        <div className={styles.actionsContainer}>
           {edit ? (
             <ActionIcons
               icon1={
@@ -75,8 +81,8 @@ const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
             Add task
           </Button>
         </div>
-      </Form>
-    </div>
+      </div>
+    </Form>
   );
 };
 
