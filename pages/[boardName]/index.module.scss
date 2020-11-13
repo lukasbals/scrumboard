@@ -2,12 +2,15 @@
   width: calc(100vw - 48px);
   margin: 24px;
 
+  & th:first-of-type {
+    width: 240px;
+  }
+  & td:first-of-type {
+    width: 240px;
+  }
+
   & tbody {
     & tr {
-      & td:first-of-type {
-        width: 240px;
-      }
-
       & td {
         border: solid rgba(0, 0, 0, 0.8) 1px;
       }
@@ -17,10 +20,19 @@
 
 .card {
   margin: 8px;
-  width: 160px;
+  width: 140px;
 }
 
 .icon {
   margin-left: 8px;
   cursor: pointer;
+}
+
+.verticalDivider {
+  margin-top: 4px;
+  height: 20px;
+  width: 2px;
+  background-color: rgba(0, 0, 0, 0.8);
+  float: left;
+  margin-right: 8px;
 }

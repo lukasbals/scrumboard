@@ -1,4 +1,4 @@
-import { Card, Typography } from 'antd';
+import { Card, Divider, Typography } from 'antd';
 import styles from './index.module.scss';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import Story from '../../ui/models/Story';
@@ -11,16 +11,28 @@ export const Board = (): JSX.Element => {
         <tr>
           <th></th>
           <th>
-            <Typography.Title level={4}>Todo</Typography.Title>
+            <Typography.Title level={4}>
+              <div className={styles.verticalDivider} />
+              Todo
+            </Typography.Title>
           </th>
           <th>
-            <Typography.Title level={4}>In progress</Typography.Title>
+            <Typography.Title level={4}>
+              <div className={styles.verticalDivider} />
+              In progress
+            </Typography.Title>
           </th>
           <th>
-            <Typography.Title level={4}>Verify</Typography.Title>
+            <Typography.Title level={4}>
+              <div className={styles.verticalDivider} />
+              Verify
+            </Typography.Title>
           </th>
           <th>
-            <Typography.Title level={4}>Done</Typography.Title>
+            <Typography.Title level={4}>
+              <div className={styles.verticalDivider} />
+              Done
+            </Typography.Title>
           </th>
         </tr>
       </thead>
