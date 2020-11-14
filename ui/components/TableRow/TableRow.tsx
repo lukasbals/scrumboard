@@ -11,7 +11,11 @@ type CollectReturnType = {
   canDrop: boolean;
 };
 
-const TableRow: React.FC = () => {
+type PropTypes = {
+  story: Story;
+};
+
+const TableRow = ({ story }: PropTypes): JSX.Element => {
   const collect = (monitor: DropTargetMonitor): CollectReturnType => ({
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
@@ -97,11 +101,13 @@ const TableRow: React.FC = () => {
     <tr>
       <td>
         <StoryCard
-          story={{ name: 'Story 1', link: 'https://apple.com' }}
-          onChange={(story: Story): void => {
-            console.log('Edit: ', story);
+          story={story}
+          onChange={(newStory: Story): void => {
+            console.log('Edit: ', newStory);
           }}
-          onDelete={(story): void => console.log('Delete: ', story)}
+          onDelete={(newStory: Story): void =>
+            console.log('Delete: ', newStory)
+          }
         />
       </td>
       <td

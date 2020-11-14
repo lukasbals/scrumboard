@@ -44,6 +44,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "antd": "^4.8.2",
+    "mobx": "^6.0.4",
+    "mobx-react": "^7.0.5",
     "next": "latest",
     "pg": "^8.5.0",
     "pg-hstore": "^2.3.3",

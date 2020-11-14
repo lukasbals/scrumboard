@@ -27,7 +27,7 @@ const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
 
   return (
     <Form
-      initialValues={story}
+      initialValues={{ name: story.name, link: story.link }}
       onFinish={onSubmit}
       form={form}
       className={styles.storyContainer}
