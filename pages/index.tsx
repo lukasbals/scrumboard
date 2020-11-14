@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import createBoard, { FormValues } from '../ui/api/createBoard';
 import BoardNameForm from '../ui/components/BoardNameForm';
 
-export const Home = (): JSX.Element => {
+export const Home: React.FC = () => {
   const router = useRouter();
 
   const onSubmit = async (values: FormValues): Promise<void> => {

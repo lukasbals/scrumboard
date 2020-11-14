@@ -12,7 +12,10 @@ body {
   box-sizing: border-box;
 }
 
-.anticon {
+.anticon-delete,
+.anticon-edit,
+.anticon-save,
+.anticon-close {
   font-size: 20px;
   color: #1890ff;
   margin-left: 8px;

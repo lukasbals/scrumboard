@@ -27,16 +27,6 @@
   }
 }
 
-.card {
-  margin: 8px;
-  width: 140px;
-}
-
-.icon {
-  margin-left: 8px;
-  cursor: pointer;
-}
-
 .verticalDivider {
   margin-top: 4px;
   height: 20px;
@@ -44,11 +34,4 @@
   background-color: rgba(0, 0, 0, 0.8);
   float: left;
   margin-right: 8px;
-}
-
-.tdContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-self: flex-start;
 }

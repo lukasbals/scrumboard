@@ -41,7 +41,12 @@ const BoardNameForm = ({ onSubmit }: PropTypes): JSX.Element => {
   };
 
   return (
-    <Form form={form} layout="inline" onFinish={onFinish}>
+    <Form
+      form={form}
+      layout="inline"
+      onFinish={onFinish}
+      initialValues={{ boardName: '' }}
+    >
       <Form.Item
         name="boardName"
         rules={[{ validator: validateBoardName }]}

@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import { useState } from 'react';
 import { Input, Form, Button } from 'antd';
+import { useDrag } from 'react-dnd';
 
 type PropTypes = {
   task: Task;
@@ -20,12 +21,21 @@ const TaskCard = ({ task, onChange, onDelete }: PropTypes): JSX.Element => {
 
   const [edit, setEdit] = useState(false);
 
+  const [{ opacity }, drag] = useDrag({
+    item: task,
+    canDrag: (): boolean => !edit,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  });
+
   const getUpdatedTask = (): Task => ({
     description: form.getFieldValue('description'),
     user: {
       color: task.user.color,
       name: form.getFieldValue('user'),
     },
+    type: task.type,
   });
 
   const onSubmit = (): void => {
@@ -34,7 +44,7 @@ const TaskCard = ({ task, onChange, onDelete }: PropTypes): JSX.Element => {
   };
 
   return (
-    <div className={styles.taskContainer}>
+    <div ref={drag} className={styles.taskContainer} style={{ opacity }}>
       <Form
         form={form}
         initialValues={{ description: task.description, user: task.user.name }}
