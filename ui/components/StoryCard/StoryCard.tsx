@@ -16,7 +16,11 @@ type PropTypes = {
   onDelete: (story: Story) => void;
 };
 
-const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
+const StoryCard: React.FC<PropTypes> = ({
+  story,
+  onChange,
+  onDelete,
+}: PropTypes) => {
   const [edit, setEdit] = useState(false);
   const [form] = Form.useForm();
 
@@ -27,7 +31,7 @@ const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
 
   return (
     <Form
-      initialValues={{ name: story.name, link: story.link }}
+      initialValues={story}
       onFinish={onSubmit}
       form={form}
       className={styles.storyContainer}
@@ -45,9 +49,9 @@ const StoryCard = ({ story, onChange, onDelete }: PropTypes): JSX.Element => {
         ) : (
           <>
             <Typography.Title level={4}>
-              {form.getFieldValue('name')}
+              {form.getFieldValue('name') ?? story.name}
             </Typography.Title>
-            <a href={form.getFieldValue('link')} target="__blank">
+            <a href={form.getFieldValue('link') ?? story.link} target="__blank">
               Link
             </a>
           </>

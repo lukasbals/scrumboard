@@ -5,7 +5,7 @@ type PropTypes = {
   icon2: JSX.Element;
 };
 
-const ActionIcons = ({ icon1, icon2 }: PropTypes): JSX.Element => {
+const ActionIcons: React.FC<PropTypes> = ({ icon1, icon2 }: PropTypes) => {
   return (
     <div className={styles.acionIconContainer}>
       {icon1}

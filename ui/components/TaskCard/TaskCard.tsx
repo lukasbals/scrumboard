@@ -16,7 +16,11 @@ type PropTypes = {
   onChange: (task: Task) => void;
   onDelete: (task: Task) => void;
 };
-const TaskCard = ({ task, onChange, onDelete }: PropTypes): JSX.Element => {
+const TaskCard: React.FC<PropTypes> = ({
+  task,
+  onChange,
+  onDelete,
+}: PropTypes) => {
   const [form] = Form.useForm();
 
   const [edit, setEdit] = useState(false);
@@ -81,7 +85,7 @@ const TaskCard = ({ task, onChange, onDelete }: PropTypes): JSX.Element => {
               <Input.TextArea rows={3} placeholder="My task" />
             </Form.Item>
           ) : (
-            form.getFieldValue('description')
+            form.getFieldValue('description') ?? task.description
           )}
         </div>
         <div className={styles.taskFooter}>
@@ -94,7 +98,7 @@ const TaskCard = ({ task, onChange, onDelete }: PropTypes): JSX.Element => {
               className={styles.nameBadge}
               style={{ backgroundColor: task.user.color }}
             >
-              {form.getFieldValue('user')}
+              {form.getFieldValue('user') ?? task.user.name}
             </div>
           )}
         </div>

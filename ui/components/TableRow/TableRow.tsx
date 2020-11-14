@@ -15,7 +15,7 @@ type PropTypes = {
   story: Story;
 };
 
-const TableRow = ({ story }: PropTypes): JSX.Element => {
+const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
   const collect = (monitor: DropTargetMonitor): CollectReturnType => ({
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),

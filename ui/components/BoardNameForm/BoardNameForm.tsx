@@ -7,7 +7,7 @@ type PropTypes = {
   onSubmit: (values: FormValues) => Promise<void>;
 };
 
-const BoardNameForm = ({ onSubmit }: PropTypes): JSX.Element => {
+const BoardNameForm: React.FC<PropTypes> = ({ onSubmit }: PropTypes) => {
   const [form] = Form.useForm();
 
   const validateBoardName = async (
