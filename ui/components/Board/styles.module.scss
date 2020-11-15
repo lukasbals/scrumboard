@@ -2,13 +2,21 @@
   overflow: scroll;
   width: 100vw;
   height: 100vh;
-  padding: 24px;
+  padding: 0 24px 24px 24px;
 }
 
 .table {
   width: calc(100vw - 48px);
   min-width: 900px;
+  position: relative;
 
+  & th {
+    padding: 24px 0 8px 0;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 100;
+  }
   & th,
   td {
     min-width: 164px;
