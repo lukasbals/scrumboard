@@ -19,11 +19,14 @@ export const Home: React.FC = () => {
       <Typography.Title className={styles.heading}>
         Scrumboard.
       </Typography.Title>
-      <Typography.Paragraph className={styles.text}>
+      <Typography.Paragraph type="secondary" className={styles.text}>
         The simplest task tracking tool for dev teams.
       </Typography.Paragraph>
       <div className={styles.divider} />
 
+      <Typography.Paragraph type="secondary">
+        Craete new or access existing board
+      </Typography.Paragraph>
       <div className={styles.formContainer}>
         <BoardNameForm onSubmit={onSubmit} />
       </div>
