@@ -1,7 +1,7 @@
 import { Button, Divider, Form, Input, Typography } from 'antd';
 import styles from './styles.module.scss';
 import Story from '../../models/Story';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   CloseOutlined,
   DeleteOutlined,
@@ -9,6 +9,7 @@ import {
   SaveOutlined,
 } from '@ant-design/icons';
 import ActionIcons from '../ActionIcons/ActionIcons';
+import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 
 type PropTypes = {
   story: Story;
@@ -21,8 +22,9 @@ const StoryCard: React.FC<PropTypes> = ({
   onChange,
   onDelete,
 }: PropTypes) => {
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(!!story.new);
   const [form] = Form.useForm();
+  const store = useContext(BoardStoreContext);
 
   useEffect(() => {
     if (edit) {
@@ -31,7 +33,7 @@ const StoryCard: React.FC<PropTypes> = ({
   }, [edit]);
 
   const onSubmit = (): void => {
-    onChange(form.getFieldsValue());
+    onChange({ ...story, ...form.getFieldsValue() });
     setEdit(false);
   };
 
@@ -46,10 +48,10 @@ const StoryCard: React.FC<PropTypes> = ({
         {edit ? (
           <>
             <Form.Item name="name" className={styles.formItem}>
-              <Input />
+              <Input placeholder="Story name" />
             </Form.Item>
             <Form.Item name="link" className={styles.formItem}>
-              <Input />
+              <Input placeholder="Link to the story" />
             </Form.Item>
           </>
         ) : (
@@ -57,9 +59,14 @@ const StoryCard: React.FC<PropTypes> = ({
             <Typography.Title level={4}>
               {form.getFieldValue('name') ?? story.name}
             </Typography.Title>
-            <a href={form.getFieldValue('link') ?? story.link} target="__blank">
-              Link
-            </a>
+            {story.link && (
+              <a
+                href={form.getFieldValue('link') ?? story.link}
+                target="__blank"
+              >
+                Link
+              </a>
+            )}
           </>
         )}
       </div>
@@ -78,7 +85,15 @@ const StoryCard: React.FC<PropTypes> = ({
                   <SaveOutlined />
                 </Button>
               }
-              icon2={<CloseOutlined onClick={(): void => setEdit(false)} />}
+              icon2={
+                <CloseOutlined
+                  onClick={(): void => {
+                    !story.new
+                      ? setEdit(false)
+                      : store.removeNewStory(story.id);
+                  }}
+                />
+              }
             />
           ) : (
             <ActionIcons

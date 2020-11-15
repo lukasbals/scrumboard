@@ -1,8 +1,9 @@
 type Story = {
-  id: number;
+  id: string;
   name: string;
   boardName: string;
   link: string;
+  new?: boolean;
 };
 
 export default Story;

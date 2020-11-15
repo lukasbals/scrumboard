@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { todo, inProgress, verify, done } from '../../../constants';
+import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 import Story from '../../models/Story';
 import Task from '../../models/Task';
 import StoryCard from '../StoryCard';
@@ -16,6 +18,8 @@ type PropTypes = {
 };
 
 const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
+  const store = useContext(BoardStoreContext);
+
   const TODO = todo(story.id);
   const IN_PROGRESS = inProgress(story.id);
   const VERIFY = verify(story.id);
@@ -108,7 +112,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
         <StoryCard
           story={story}
           onChange={(newStory: Story): void => {
-            console.log('Edit: ', newStory);
+            store.saveStory(newStory);
           }}
           onDelete={(newStory: Story): void => {
             console.log('Delete: ', newStory);

@@ -6,6 +6,7 @@ import BoardStore from '../../stores/BoardStore';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 import TableRow from '../TableRow';
 import styles from './styles.module.scss';
+import AddStory from '../AddStory';
 
 const Board: React.FC = () => {
   const store: BoardStore = useContext(BoardStoreContext);
@@ -54,6 +55,7 @@ const Board: React.FC = () => {
           )}
         </tbody>
       </table>
+      <AddStory onClick={(): void => store.addStory()} />
     </div>
   );
 };

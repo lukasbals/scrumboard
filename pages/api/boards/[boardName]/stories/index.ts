@@ -21,7 +21,7 @@ export default async (
           ...req.body,
           boardName: req.query.boardName,
         });
-        res.status(200).json(story);
+        res.status(202).json(story);
       } catch (error) {
         res.status(400).json({ message: error.message });
       }

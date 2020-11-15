@@ -8,13 +8,17 @@ const Story = sequelize.define(
   'Story',
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       unique: true,
       primaryKey: true,
-      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
+      defaultValue: '',
+    },
+    link: {
+      type: DataTypes.STRING,
+      defaultValue: '',
     },
     boardName: {
       type: DataTypes.STRING,
