@@ -1,7 +1,7 @@
 import { Button, Divider, Form, Input, Typography } from 'antd';
 import styles from './styles.module.scss';
 import Story from '../../models/Story';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CloseOutlined,
   DeleteOutlined,
@@ -23,6 +23,12 @@ const StoryCard: React.FC<PropTypes> = ({
 }: PropTypes) => {
   const [edit, setEdit] = useState(false);
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (edit) {
+      form.getFieldInstance('name').focus();
+    }
+  }, [edit]);
 
   const onSubmit = (): void => {
     onChange(form.getFieldsValue());

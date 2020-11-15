@@ -7,7 +7,7 @@ import {
   EditOutlined,
   SaveOutlined,
 } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Form, Button } from 'antd';
 import { useDrag } from 'react-dnd';
 
@@ -32,6 +32,12 @@ const TaskCard: React.FC<PropTypes> = ({
       opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   });
+
+  useEffect(() => {
+    if (edit) {
+      form.getFieldInstance('description').focus();
+    }
+  }, [edit]);
 
   const getUpdatedTask = (): Task => ({
     description: form.getFieldValue('description'),
