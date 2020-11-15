@@ -1,11 +1,10 @@
 type Task = {
+  id: string;
   description: string;
   state: 'TODO' | 'IN_PROGRESS' | 'VERIFY' | 'DONE';
   type: string;
-  user: {
-    name: string;
-    color: string;
-  };
+  username: string;
+  usercolor: string;
 };
 
 export default Task;

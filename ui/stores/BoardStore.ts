@@ -38,6 +38,7 @@ class BoardStore {
         name: '',
         id: uuidv4(),
         new: true,
+        tasks: [],
       },
     ];
   };
@@ -49,9 +50,8 @@ class BoardStore {
   saveOrUpdateStory = async (story: Story): Promise<void> => {
     if (story.new) {
       const newStory = await createStory(story);
-      this.replaceStoryWithNewOne(newStory);
+      this.replaceStoryWithNewOne({ ...newStory, tasks: [] });
     } else {
-      console.log('IN');
       const updatedStory = await updateStory(story);
       this.replaceStoryWithNewOne(updatedStory);
     }

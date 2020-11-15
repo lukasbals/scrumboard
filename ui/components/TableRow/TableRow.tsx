@@ -8,6 +8,10 @@ import StoryCard from '../StoryCard';
 import TaskCard from '../TaskCard';
 import styles from './styles.module.scss';
 
+const addTypesToTasks = (tasks, storyId: string): Task[] => {
+  return tasks.map((task) => ({ ...task, type: `${task.state}-${storyId}` }));
+};
+
 type CollectReturnType = {
   isOver: boolean;
   canDrop: boolean;
@@ -106,6 +110,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
     backgroundColors.done = canDropBackgroundColor;
   }
 
+  const tasks: Task[] = addTypesToTasks(story.tasks, story.id);
   return (
     <tr>
       <td>
@@ -125,44 +130,74 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
         className={styles.tableRow}
       >
         <div className={styles.tdContainer}>
-          <TaskCard
-            task={{
-              description: 'Task to do',
-              state: 'TODO',
-              user: { name: 'Markus', color: '#8aaa5f' },
-              type: `TODO-${story.id}`,
-            }}
-            onChange={(task): void => console.log('On change: ', task)}
-            onDelete={(task): void => console.log('On delete: ', task)}
-          />
+          {tasks.map(
+            (task) =>
+              task.state === 'TODO' && (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onChange={(task): void => console.log('On change: ', task)}
+                  onDelete={(task): void => console.log('On delete: ', task)}
+                />
+              ),
+          )}
         </div>
       </td>
       <td
         ref={dropInProgress}
         style={{ backgroundColor: backgroundColors.inProgress }}
         className={styles.tableRow}
-      ></td>
+      >
+        <div className={styles.tdContainer}>
+          {tasks.map(
+            (task) =>
+              task.state === 'IN_PROGRESS' && (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onChange={(task): void => console.log('On change: ', task)}
+                  onDelete={(task): void => console.log('On delete: ', task)}
+                />
+              ),
+          )}
+        </div>
+      </td>
       <td
         ref={dropVerify}
         style={{ backgroundColor: backgroundColors.verify }}
         className={styles.tableRow}
-      ></td>
+      >
+        <div className={styles.tdContainer}>
+          {tasks.map(
+            (task) =>
+              task.state === 'VERIFY' && (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onChange={(task): void => console.log('On change: ', task)}
+                  onDelete={(task): void => console.log('On delete: ', task)}
+                />
+              ),
+          )}
+        </div>
+      </td>
       <td
         ref={dropDone}
         style={{ backgroundColor: backgroundColors.done }}
         className={styles.tableRow}
       >
         <div className={styles.tdContainer}>
-          <TaskCard
-            task={{
-              description: 'Task 1',
-              state: 'DONE',
-              user: { name: 'Lukas', color: '#5faaa6' },
-              type: `DONE-${story.id}`,
-            }}
-            onChange={(task): void => console.log('On change: ', task)}
-            onDelete={(task): void => console.log('On delete: ', task)}
-          />
+          {tasks.map(
+            (task) =>
+              task.state === 'DONE' && (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onChange={(task): void => console.log('On change: ', task)}
+                  onDelete={(task): void => console.log('On delete: ', task)}
+                />
+              ),
+          )}
         </div>
       </td>
     </tr>

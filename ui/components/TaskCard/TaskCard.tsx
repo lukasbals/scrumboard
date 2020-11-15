@@ -40,13 +40,9 @@ const TaskCard: React.FC<PropTypes> = ({
   }, [edit]);
 
   const getUpdatedTask = (): Task => ({
+    ...task,
     description: form.getFieldValue('description'),
-    user: {
-      color: task.user.color,
-      name: form.getFieldValue('user'),
-    },
-    state: task.state,
-    type: task.type,
+    username: form.getFieldValue('user'),
   });
 
   const onSubmit = (): void => {
@@ -58,7 +54,7 @@ const TaskCard: React.FC<PropTypes> = ({
     <div ref={drag} className={styles.taskContainer} style={{ opacity }}>
       <Form
         form={form}
-        initialValues={{ description: task.description, user: task.user.name }}
+        initialValues={{ description: task.description, user: task.username }}
         onFinish={onSubmit}
       >
         <div className={styles.taskHeader}>
@@ -103,9 +99,9 @@ const TaskCard: React.FC<PropTypes> = ({
           ) : (
             <div
               className={styles.nameBadge}
-              style={{ backgroundColor: task.user.color }}
+              style={{ backgroundColor: task.usercolor }}
             >
-              {form.getFieldValue('user') ?? task.user.name}
+              {form.getFieldValue('user') ?? task.username}
             </div>
           )}
         </div>

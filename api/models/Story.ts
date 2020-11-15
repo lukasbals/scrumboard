@@ -4,9 +4,7 @@ import Task from './Task';
 
 const sequelize = getSequelize();
 
-class Story extends Model {
-  id: string;
-}
+class Story extends Model {}
 Story.init(
   {
     id: {
