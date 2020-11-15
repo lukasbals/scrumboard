@@ -1,10 +1,13 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import getSequelize from '../sequelize';
+import Story from './Story';
 
 const sequelize = getSequelize();
 
-const Board = sequelize.define(
-  'Board',
+class Board extends Model {
+  name: string;
+}
+Board.init(
   {
     name: {
       type: DataTypes.STRING,
@@ -14,9 +17,14 @@ const Board = sequelize.define(
     },
   },
   {
+    sequelize,
+    modelName: 'board',
     tableName: 'board',
     indexes: [{ unique: true, fields: ['name'] }],
+    paranoid: true,
   },
 );
+
+Board.hasMany(Story);
 
 export default Board;

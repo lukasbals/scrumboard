@@ -1,37 +1,41 @@
 import { DataTypes, Model } from 'sequelize';
 import getSequelize from '../sequelize';
-import Task from './Task';
 
 const sequelize = getSequelize();
 
-class Story extends Model {
-  id: string;
-}
-Story.init(
+class Task extends Model {}
+Task.init(
   {
     id: {
       type: DataTypes.STRING,
       unique: true,
       primaryKey: true,
     },
-    name: {
+    description: {
       type: DataTypes.STRING,
       defaultValue: '',
     },
-    link: {
+    username: {
       type: DataTypes.STRING,
       defaultValue: '',
+    },
+    usercolor: {
+      type: DataTypes.STRING,
+      defaultValue: '#ffff',
+    },
+    state: {
+      type: DataTypes.ENUM,
+      values: ['TODO', 'IN_PROGRESS', 'VERIFY', 'DONE'],
+      defaultValue: 'TODO',
     },
   },
   {
     sequelize,
-    modelName: 'story',
-    tableName: 'story',
+    modelName: 'task',
+    tableName: 'task',
     indexes: [{ unique: true, fields: ['id'] }],
     paranoid: true,
   },
 );
 
-Story.hasMany(Task);
-
-export default Story;
+export default Task;

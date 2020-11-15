@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Board from '../../../api/models/Board';
+import Board from '../../../../api/models/Board';
 
 export default async (
   req: NextApiRequest,
@@ -7,7 +7,6 @@ export default async (
 ): Promise<void> => {
   if (req.method === 'GET') {
     await Board.sync();
-
     const board = await Board.findOne({
       where: { name: req.query.boardName },
     });
