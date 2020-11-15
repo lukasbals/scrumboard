@@ -8,8 +8,8 @@ const deleteStory = async (
   const response = await fetch(`/api/boards/${boardName}/stories/${storyId}`, {
     method: 'DELETE',
   });
+  message.destroy();
   if (response.status === 200) {
-    message.destroy();
     message.success('Story deleted!');
     return;
   }

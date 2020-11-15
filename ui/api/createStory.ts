@@ -8,9 +8,9 @@ const createStory = async (story: Story): Promise<Story> => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(story),
   });
+  message.destroy();
   if (response.status === 202) {
     const story = await response.json();
-    message.destroy();
     message.success('Story saved!');
     return story;
   }

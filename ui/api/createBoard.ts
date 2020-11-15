@@ -14,9 +14,9 @@ const createBoard = async (values: FormValues): Promise<Board> => {
       name: values.boardName,
     }),
   });
+  message.destroy();
   if (response.status === 202) {
     const board = await response.json();
-    message.destroy();
     message.success('Board created!');
     return board;
   }
