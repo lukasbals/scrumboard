@@ -39,6 +39,7 @@ const TaskCard: React.FC<PropTypes> = ({
       color: task.user.color,
       name: form.getFieldValue('user'),
     },
+    state: task.state,
     type: task.type,
   });
 

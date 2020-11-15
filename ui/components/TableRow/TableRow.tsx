@@ -1,5 +1,5 @@
 import { DropTargetMonitor, useDrop } from 'react-dnd';
-import { DONE, IN_PROGRESS, TODO, VERIFY } from '../../../constants';
+import { todo, inProgress, verify, done } from '../../../constants';
 import Story from '../../models/Story';
 import Task from '../../models/Task';
 import StoryCard from '../StoryCard';
@@ -16,6 +16,11 @@ type PropTypes = {
 };
 
 const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
+  const TODO = todo(story.id);
+  const IN_PROGRESS = inProgress(story.id);
+  const VERIFY = verify(story.id);
+  const DONE = done(story.id);
+
   const collect = (monitor: DropTargetMonitor): CollectReturnType => ({
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
@@ -105,16 +110,29 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
           onChange={(newStory: Story): void => {
             console.log('Edit: ', newStory);
           }}
-          onDelete={(newStory: Story): void =>
-            console.log('Delete: ', newStory)
-          }
+          onDelete={(newStory: Story): void => {
+            console.log('Delete: ', newStory);
+          }}
         />
       </td>
       <td
         ref={dropTodo}
         style={{ backgroundColor: backgroundColors.todo }}
         className={styles.tableRow}
-      ></td>
+      >
+        <div className={styles.tdContainer}>
+          <TaskCard
+            task={{
+              description: 'Task to do',
+              state: 'TODO',
+              user: { name: 'Markus', color: '#8aaa5f' },
+              type: `TODO-${story.id}`,
+            }}
+            onChange={(task): void => console.log('On change: ', task)}
+            onDelete={(task): void => console.log('On delete: ', task)}
+          />
+        </div>
+      </td>
       <td
         ref={dropInProgress}
         style={{ backgroundColor: backgroundColors.inProgress }}
@@ -134,8 +152,9 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
           <TaskCard
             task={{
               description: 'Task 1',
+              state: 'DONE',
               user: { name: 'Lukas', color: '#5faaa6' },
-              type: DONE,
+              type: `DONE-${story.id}`,
             }}
             onChange={(task): void => console.log('On change: ', task)}
             onDelete={(task): void => console.log('On delete: ', task)}
