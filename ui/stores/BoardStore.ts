@@ -3,6 +3,7 @@ import fetchStories from '../api/fetchStories';
 import Story from '../models/Story';
 import { v4 as uuidv4 } from 'uuid';
 import createStory from '../api/createStory';
+import deleteStory from '../api/deleteStory';
 
 class BoardStore {
   stories: Story[] = [];
@@ -15,6 +16,7 @@ class BoardStore {
       loadStories: action,
       addStory: action,
       removeNewStory: action,
+      deleteStory: action,
     });
     this.boardName = boardName;
   }
@@ -51,6 +53,11 @@ class BoardStore {
 
   removeNewStory = (storyId: string): void => {
     this.stories = this.stories.filter((story) => story.id !== storyId);
+  };
+
+  deleteStory = (storyId: string): void => {
+    this.removeNewStory(storyId);
+    deleteStory(storyId, this.boardName);
   };
 }
 
