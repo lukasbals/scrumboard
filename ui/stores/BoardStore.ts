@@ -4,6 +4,7 @@ import Story from '../models/Story';
 import { v4 as uuidv4 } from 'uuid';
 import createStory from '../api/createStory';
 import deleteStory from '../api/deleteStory';
+import updateStory from '../api/updateStory';
 
 class BoardStore {
   stories: Story[] = [];
@@ -15,6 +16,7 @@ class BoardStore {
       boardName: observable,
       loadStories: action,
       addStory: action,
+      saveOrUpdateStory: action,
       removeNewStory: action,
       deleteStory: action,
     });
@@ -40,14 +42,18 @@ class BoardStore {
     ];
   };
 
-  saveStory = async (story: Story): Promise<void> => {
+  replaceStoryWithNewOne = (story: Story): void => {
+    this.stories = this.stories.map((s) => (s.id === story.id ? story : s));
+  };
+
+  saveOrUpdateStory = async (story: Story): Promise<void> => {
     if (story.new) {
       const newStory = await createStory(story);
-      console.log(newStory);
-      this.stories = [
-        ...this.stories.filter((s) => s.id !== story.id),
-        newStory,
-      ];
+      this.replaceStoryWithNewOne(newStory);
+    } else {
+      console.log('IN');
+      const updatedStory = await updateStory(story);
+      this.replaceStoryWithNewOne(updatedStory);
     }
   };
 

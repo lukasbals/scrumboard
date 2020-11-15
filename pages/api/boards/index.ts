@@ -7,11 +7,11 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   switch (req.method) {
-    case 'GET':
-      await Board.sync();
-      const boards = await Board.findAll();
-      res.status(200).json(boards);
-      break;
+    // case 'GET':
+    //   await Board.sync();
+    //   const boards = await Board.findAll({ order: [['createdAt', 'ASC']] });
+    //   res.status(200).json(boards);
+    //   break;
 
     case 'POST':
       await Board.sync();

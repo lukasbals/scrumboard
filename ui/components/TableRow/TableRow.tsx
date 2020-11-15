@@ -111,8 +111,8 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
       <td>
         <StoryCard
           story={story}
-          onChange={(newStory: Story): void => {
-            store.saveStory(newStory);
+          onChange={(story: Story): void => {
+            store.saveOrUpdateStory(story);
           }}
           onDelete={(story: Story): void => {
             store.deleteStory(story.id);

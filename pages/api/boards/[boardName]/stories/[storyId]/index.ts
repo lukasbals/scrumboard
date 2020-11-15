@@ -6,6 +6,21 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   switch (req.method) {
+    case 'PUT':
+      await Story.sync();
+      try {
+        await Story.update(
+          { name: req.body.name, link: req.body.link },
+          {
+            where: { id: req.query.storyId, boardName: req.query.boardName },
+          },
+        );
+        res.status(200).json(req.body);
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
+      break;
+
     case 'DELETE':
       await Story.sync();
       try {

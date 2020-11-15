@@ -10,6 +10,7 @@ export default async (
       await Story.sync();
       const stories = await Story.findAll({
         where: { boardName: req.query.boardName },
+        order: [['createdAt', 'ASC']],
       });
       res.status(200).json(stories);
       break;
