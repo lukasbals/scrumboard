@@ -5,6 +5,8 @@ type Task = {
   type: string;
   username: string;
   usercolor: string;
+  storyId: string;
+  new?: boolean;
 };
 
 export default Task;

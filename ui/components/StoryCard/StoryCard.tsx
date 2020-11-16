@@ -15,12 +15,14 @@ type PropTypes = {
   story: Story;
   onChange: (story: Story) => void;
   onDelete: (story: Story) => void;
+  onAddTask: () => void;
 };
 
 const StoryCard: React.FC<PropTypes> = ({
   story,
   onChange,
   onDelete,
+  onAddTask,
 }: PropTypes) => {
   const [edit, setEdit] = useState(!!story.new);
   const [form] = Form.useForm();
@@ -102,7 +104,12 @@ const StoryCard: React.FC<PropTypes> = ({
             />
           )}
 
-          <Button size="small" type="primary" className={styles.addTaskButton}>
+          <Button
+            size="small"
+            type="primary"
+            className={styles.addTaskButton}
+            onClick={onAddTask}
+          >
             Add task
           </Button>
         </div>

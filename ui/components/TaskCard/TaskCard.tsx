@@ -7,9 +7,10 @@ import {
   EditOutlined,
   SaveOutlined,
 } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Input, Form, Button } from 'antd';
 import { useDrag } from 'react-dnd';
+import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 
 type PropTypes = {
   task: Task;
@@ -22,8 +23,9 @@ const TaskCard: React.FC<PropTypes> = ({
   onDelete,
 }: PropTypes) => {
   const [form] = Form.useForm();
+  const store = useContext(BoardStoreContext);
 
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(!!task.new);
 
   const [{ opacity }, drag] = useDrag({
     item: task,
@@ -69,7 +71,13 @@ const TaskCard: React.FC<PropTypes> = ({
                   <SaveOutlined />
                 </Button>
               }
-              icon2={<CloseOutlined onClick={(): void => setEdit(false)} />}
+              icon2={
+                <CloseOutlined
+                  onClick={(): void =>
+                    !task.new ? setEdit(false) : store.removeNewTask(task)
+                  }
+                />
+              }
             />
           ) : (
             <ActionIcons

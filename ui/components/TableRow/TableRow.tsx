@@ -116,11 +116,14 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
       <td>
         <StoryCard
           story={story}
-          onChange={(story: Story): void => {
-            store.saveOrUpdateStory(story);
+          onChange={(s: Story): void => {
+            store.saveOrUpdateStory(s);
           }}
-          onDelete={(story: Story): void => {
-            store.deleteStory(story.id);
+          onDelete={(s: Story): void => {
+            store.deleteStory(s.id);
+          }}
+          onAddTask={(): void => {
+            store.addTask(story.id);
           }}
         />
       </td>
@@ -136,7 +139,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                 <TaskCard
                   key={task.id}
                   task={task}
-                  onChange={(task): void => console.log('On change: ', task)}
+                  onChange={(task): void => store.saveOrUpdateTask(task)}
                   onDelete={(task): void => console.log('On delete: ', task)}
                 />
               ),
@@ -155,7 +158,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                 <TaskCard
                   key={task.id}
                   task={task}
-                  onChange={(task): void => console.log('On change: ', task)}
+                  onChange={(task): void => store.saveOrUpdateTask(task)}
                   onDelete={(task): void => console.log('On delete: ', task)}
                 />
               ),
@@ -174,7 +177,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                 <TaskCard
                   key={task.id}
                   task={task}
-                  onChange={(task): void => console.log('On change: ', task)}
+                  onChange={(task): void => store.saveOrUpdateTask(task)}
                   onDelete={(task): void => console.log('On delete: ', task)}
                 />
               ),
@@ -193,7 +196,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                 <TaskCard
                   key={task.id}
                   task={task}
-                  onChange={(task): void => console.log('On change: ', task)}
+                  onChange={(task): void => store.saveOrUpdateTask(task)}
                   onDelete={(task): void => console.log('On delete: ', task)}
                 />
               ),
