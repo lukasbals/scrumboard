@@ -10,6 +10,7 @@ export default async (
   switch (req.method) {
     case 'GET':
       await Story.sync();
+      await Task.sync();
       const stories = await Story.findAll({
         where: { boardName: req.query.boardName },
         order: [['createdAt', 'ASC']],

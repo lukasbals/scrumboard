@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Story from '../../../../../../api/models/Story';
+import Task from '../../../../../../api/models/Task';
 
 export default async (
   req: NextApiRequest,
@@ -23,7 +24,9 @@ export default async (
 
     case 'DELETE':
       await Story.sync();
+      await Task.sync();
       try {
+        await Task.destroy({ where: { storyId: req.query.storyId } });
         await Story.destroy({
           where: { id: req.query.storyId, boardName: req.query.boardName },
         });
