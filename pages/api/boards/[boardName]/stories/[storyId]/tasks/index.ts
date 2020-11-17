@@ -8,12 +8,11 @@ export default async (
 ): Promise<void> => {
   switch (req.method) {
     case 'POST':
-      await Story.sync();
-      await Task.sync();
       try {
+        const story = await Story.findOne({ where: { id: req.query.storyId } });
         const task = await Task.create({
           ...req.body,
-          storyId: req.query.storyId,
+          storyId: story.getDataValue('id'),
         });
         res.status(202).json(task);
       } catch (error) {

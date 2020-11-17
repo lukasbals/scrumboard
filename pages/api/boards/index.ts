@@ -8,13 +8,11 @@ export default async (
 ): Promise<void> => {
   switch (req.method) {
     // case 'GET':
-    //   await Board.sync();
     //   const boards = await Board.findAll({ order: [['createdAt', 'ASC']] });
     //   res.status(200).json(boards);
     //   break;
 
     case 'POST':
-      await Board.sync();
       try {
         if (boardNameRegex.test(req.body.name)) {
           const board = await Board.create(req.body);

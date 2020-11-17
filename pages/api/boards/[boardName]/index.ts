@@ -6,7 +6,6 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   if (req.method === 'GET') {
-    await Board.sync();
     const board = await Board.findOne({
       where: { name: req.query.boardName },
     });

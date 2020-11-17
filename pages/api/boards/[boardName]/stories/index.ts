@@ -9,8 +9,6 @@ export default async (
 ): Promise<void> => {
   switch (req.method) {
     case 'GET':
-      await Story.sync();
-      await Task.sync();
       const stories = await Story.findAll({
         where: { boardName: req.query.boardName },
         order: [['createdAt', 'ASC']],
@@ -23,12 +21,13 @@ export default async (
       break;
 
     case 'POST':
-      await Board.sync();
-      await Story.sync();
       try {
+        const board = await Board.findOne({
+          where: { name: req.query.boardName },
+        });
         const story = await Story.create({
           ...req.body,
-          boardName: req.query.boardName,
+          boardName: board.getDataValue('name'),
         });
         res.status(202).json(story);
       } catch (error) {

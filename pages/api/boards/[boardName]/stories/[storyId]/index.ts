@@ -8,7 +8,6 @@ export default async (
 ): Promise<void> => {
   switch (req.method) {
     case 'PUT':
-      await Story.sync();
       try {
         await Story.update(
           { name: req.body.name, link: req.body.link },
@@ -23,8 +22,6 @@ export default async (
       break;
 
     case 'DELETE':
-      await Story.sync();
-      await Task.sync();
       try {
         await Task.destroy({ where: { storyId: req.query.storyId } });
         await Story.destroy({
