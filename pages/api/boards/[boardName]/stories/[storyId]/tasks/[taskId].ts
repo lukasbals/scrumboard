@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Story from '../../../../../../api/models/Story';
-import Task from '../../../../../../api/models/Task';
+import Task from '../../../../../../../api/models/Task';
 
 export default async (
   req: NextApiRequest,
@@ -9,10 +8,14 @@ export default async (
   switch (req.method) {
     case 'PUT':
       try {
-        await Story.update(
-          { name: req.body.name, link: req.body.link },
+        await Task.update(
           {
-            where: { id: req.query.storyId, boardName: req.query.boardName },
+            description: req.body.description,
+            username: req.body.username,
+            state: req.body.state,
+          },
+          {
+            where: { id: req.query.taskId, storyId: req.query.storyId },
           },
         );
         res.status(200).json(req.body);
@@ -23,10 +26,7 @@ export default async (
 
     case 'DELETE':
       try {
-        await Task.destroy({ where: { storyId: req.query.storyId } });
-        await Story.destroy({
-          where: { id: req.query.storyId, boardName: req.query.boardName },
-        });
+        await Task.destroy({ where: { id: req.query.taskId } });
         res.status(200).json({ success: true });
       } catch (error) {
         res.status(400).json({ message: error.message });

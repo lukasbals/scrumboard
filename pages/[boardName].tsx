@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import Board from '../../ui/components/Board';
-import { BoardStoreContext } from '../../ui/contexts/BoardStoreContext';
-import BoardStore from '../../ui/stores/BoardStore';
+import Board from '../ui/components/Board';
+import { BoardStoreContext } from '../ui/contexts/BoardStoreContext';
+import BoardStore from '../ui/stores/BoardStore';
 
 const BoardRoute: React.FC = () => {
   const {

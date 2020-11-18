@@ -34,20 +34,20 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
     canDrop: monitor.canDrop(),
   });
 
-  const onDropTodo = (item: Task, monitor: DropTargetMonitor): void => {
-    console.log('Todo drop: ', item, monitor);
+  const onDropTodo = (task: Task): void => {
+    store.moveTask(task, 'TODO');
   };
 
-  const onDropInProgress = (item: Task, monitor: DropTargetMonitor): void => {
-    console.log('InProgress drop: ', item, monitor);
+  const onDropInProgress = (task: Task): void => {
+    store.moveTask(task, 'IN_PROGRESS');
   };
 
-  const onDropVerify = (item: Task, monitor: DropTargetMonitor): void => {
-    console.log('Verify drop: ', item, monitor);
+  const onDropVerify = (task: Task): void => {
+    store.moveTask(task, 'VERIFY');
   };
 
-  const onDropDone = (item: Task, monitor: DropTargetMonitor): void => {
-    console.log('Done drop: ', item, monitor);
+  const onDropDone = (task: Task): void => {
+    store.moveTask(task, 'DONE');
   };
 
   const [{ isOver: isOverTodo, canDrop: canDropTodo }, dropTodo] = useDrop({
@@ -140,7 +140,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                   key={task.id}
                   task={task}
                   onChange={(task): void => store.saveOrUpdateTask(task)}
-                  onDelete={(task): void => console.log('On delete: ', task)}
+                  onDelete={(task): void => store.deleteTask(task)}
                 />
               ),
           )}
@@ -159,7 +159,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                   key={task.id}
                   task={task}
                   onChange={(task): void => store.saveOrUpdateTask(task)}
-                  onDelete={(task): void => console.log('On delete: ', task)}
+                  onDelete={(task): void => store.deleteTask(task)}
                 />
               ),
           )}
@@ -178,7 +178,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                   key={task.id}
                   task={task}
                   onChange={(task): void => store.saveOrUpdateTask(task)}
-                  onDelete={(task): void => console.log('On delete: ', task)}
+                  onDelete={(task): void => store.deleteTask(task)}
                 />
               ),
           )}
@@ -197,7 +197,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
                   key={task.id}
                   task={task}
                   onChange={(task): void => store.saveOrUpdateTask(task)}
-                  onDelete={(task): void => console.log('On delete: ', task)}
+                  onDelete={(task): void => store.deleteTask(task)}
                 />
               ),
           )}

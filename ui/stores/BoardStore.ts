@@ -1,11 +1,15 @@
 import { action, makeObservable, observable } from 'mobx';
-import fetchStories from '../api/fetchStories';
-import Story from '../models/Story';
 import { v4 as uuidv4 } from 'uuid';
+
+import fetchStories from '../api/fetchStories';
 import createStory from '../api/createStory';
 import deleteStory from '../api/deleteStory';
 import updateStory from '../api/updateStory';
 import createTask from '../api/createTask';
+import updateTask from '../api/updateTask';
+import deleteTask from '../api/deleteTask';
+
+import Story from '../models/Story';
 import Task from '../models/Task';
 
 class BoardStore {
@@ -24,6 +28,8 @@ class BoardStore {
       addTask: action,
       saveOrUpdateTask: action,
       removeNewTask: action,
+      deleteTask: action,
+      moveTask: action,
     });
     this.boardName = boardName;
   }
@@ -117,6 +123,24 @@ class BoardStore {
     const story = this.findStory(task.storyId);
     story.tasks = story.tasks.filter((t: Task) => t.id !== task.id);
     this.replaceStoryWithNewOne(story);
+  };
+
+  deleteTask = (task: Task): void => {
+    this.removeNewTask(task);
+    deleteTask(task, this.boardName);
+  };
+
+  moveTask = (
+    task: Task,
+    newState: 'TODO' | 'IN_PROGRESS' | 'VERIFY' | 'DONE',
+  ): void => {
+    const story = this.findStory(task.storyId);
+    task.state = newState;
+
+    story.tasks = this.replaceTaskWithExistingOne(task, story.tasks);
+    this.replaceStoryWithNewOne(story);
+
+    updateTask(task, this.boardName, true);
   };
 }
 

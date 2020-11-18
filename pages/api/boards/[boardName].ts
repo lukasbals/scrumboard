@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Board from '../../../../api/models/Board';
+import Board from '../../../api/models/Board';
 
 export default async (
   req: NextApiRequest,
