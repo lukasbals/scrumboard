@@ -106,17 +106,18 @@ class BoardStore {
   };
 
   saveOrUpdateTask = async (task: Task): Promise<void> => {
+    const story = this.findStory(task.storyId);
+    let newOrUpdatedTask: Task;
     if (task.new) {
-      const story = this.findStory(task.storyId);
-      const newTask = await createTask(task, this.boardName);
-
-      story.tasks = this.replaceTaskWithExistingOne(newTask, story.tasks);
-      this.replaceStoryWithNewOne(story);
+      newOrUpdatedTask = await createTask(task, this.boardName);
     } else {
-      console.log('Update task');
-      // const updatedTask = await updateTask(task, this.boardName);
-      // this.replaceStoryWithNewOne(updatedStory);
+      newOrUpdatedTask = await updateTask(task, this.boardName);
     }
+    story.tasks = this.replaceTaskWithExistingOne(
+      newOrUpdatedTask,
+      story.tasks,
+    );
+    this.replaceStoryWithNewOne(story);
   };
 
   removeNewTask = (task: Task): void => {
