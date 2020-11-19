@@ -11,6 +11,8 @@ yarn install
 yarn run dev
 ```
 
+Note: To create the database schema call the `/api` once.
+
 ## Start production server
 
 Run the following commands to start the production server:
@@ -22,6 +24,8 @@ yarn install
 yarn build
 yarn start
 ```
+
+Note: To create the database schema call the `/api` once.
 
 ## Dev tools used:
 
