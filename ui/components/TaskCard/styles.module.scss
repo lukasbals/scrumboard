@@ -1,7 +1,7 @@
 .taskContainer {
   border-radius: 2px;
   border: solid #888888 1px;
-  width: 140px;
+  width: 160px;
   margin: 8px;
   overflow: hidden;
   transition: opacity ease 0.2s;
@@ -19,6 +19,19 @@
 .taskBody {
   min-height: 92px;
   padding: 8px;
+
+  & h1 {
+    font-weight: 600;
+    font-size: 24px;
+  }
+  & h2 {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  & ol,
+  ul {
+    padding: 0 0 0 24px;
+  }
 }
 
 .taskFooter {

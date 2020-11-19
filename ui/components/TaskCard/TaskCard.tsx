@@ -10,6 +10,7 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { Input, Form, Button } from 'antd';
 import { useDrag } from 'react-dnd';
+import ReactMarkdown from 'react-markdown';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 
 type PropTypes = {
@@ -53,12 +54,12 @@ const TaskCard: React.FC<PropTypes> = ({
   };
 
   return (
-    <div ref={drag} className={styles.taskContainer} style={{ opacity }}>
-      <Form
-        form={form}
-        initialValues={{ description: task.description, user: task.username }}
-        onFinish={onSubmit}
-      >
+    <Form
+      form={form}
+      initialValues={{ description: task.description, user: task.username }}
+      onFinish={onSubmit}
+    >
+      <div ref={drag} className={styles.taskContainer} style={{ opacity }}>
         <div className={styles.taskHeader}>
           {edit ? (
             <ActionIcons
@@ -93,10 +94,15 @@ const TaskCard: React.FC<PropTypes> = ({
         <div className={styles.taskBody}>
           {edit ? (
             <Form.Item name="description" className={styles.formItem}>
-              <Input.TextArea rows={3} placeholder="My task" />
+              <Input.TextArea
+                autoSize={{ minRows: 3, maxRows: 20 }}
+                placeholder="My task"
+              />
             </Form.Item>
           ) : (
-            form.getFieldValue('description') ?? task.description
+            <ReactMarkdown>
+              {form.getFieldValue('description') ?? task.description}
+            </ReactMarkdown>
           )}
         </div>
         <div className={styles.taskFooter}>
@@ -113,8 +119,8 @@ const TaskCard: React.FC<PropTypes> = ({
             </div>
           )}
         </div>
-      </Form>
-    </div>
+      </div>
+    </Form>
   );
 };
 
