@@ -8,7 +8,7 @@ import {
   SaveOutlined,
 } from '@ant-design/icons';
 import { useContext, useEffect, useState } from 'react';
-import { Input, Form, Button } from 'antd';
+import { Input, Form, Button, Typography } from 'antd';
 import { useDrag } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
@@ -100,9 +100,11 @@ const TaskCard: React.FC<PropTypes> = ({
               />
             </Form.Item>
           ) : (
-            <ReactMarkdown>
-              {form.getFieldValue('description') ?? task.description}
-            </ReactMarkdown>
+            <Typography.Text>
+              <ReactMarkdown>
+                {form.getFieldValue('description') ?? task.description}
+              </ReactMarkdown>
+            </Typography.Text>
           )}
         </div>
         <div className={styles.taskFooter}>
@@ -115,7 +117,9 @@ const TaskCard: React.FC<PropTypes> = ({
               className={styles.nameBadge}
               style={{ backgroundColor: task.usercolor }}
             >
-              {form.getFieldValue('user') ?? task.username}
+              <Typography.Text>
+                {form.getFieldValue('user') ?? task.username}
+              </Typography.Text>
             </div>
           )}
         </div>
