@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Board from '../../../api/models/Board';
+import User from '../../../api/models/User';
 
 export default async (
   req: NextApiRequest,
@@ -8,6 +9,7 @@ export default async (
   if (req.method === 'GET') {
     const board = await Board.findOne({
       where: { name: req.query.boardName },
+      include: { model: User, as: 'users' },
     });
 
     if (board) {

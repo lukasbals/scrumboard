@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import getSequelize from '../sequelize';
 import Story from './Story';
+import User from './User';
 
 const sequelize = getSequelize();
 
@@ -26,5 +27,6 @@ Board.init(
 );
 
 Board.hasMany(Story);
+Board.hasMany(User);
 
 export default Board;
