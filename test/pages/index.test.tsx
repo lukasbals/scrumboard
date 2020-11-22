@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from '../testUtils';
 import { Home } from '../../pages/index';
+import { RenderResult } from '@testing-library/react';
 
-const setup = () => render(<Home />);
+const setup = (): RenderResult => render(<Home />);
 
 describe('The Home page', () => {
   it('displays the headline', () => {
