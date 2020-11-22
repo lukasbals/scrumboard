@@ -7,11 +7,6 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   switch (req.method) {
-    // case 'GET':
-    //   const boards = await Board.findAll({ order: [['createdAt', 'ASC']] });
-    //   res.status(200).json(boards);
-    //   break;
-
     case 'POST':
       try {
         if (boardNameRegex.test(req.body.name)) {
