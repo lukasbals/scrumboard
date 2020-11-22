@@ -19,10 +19,6 @@ Task.init(
       type: DataTypes.STRING,
       defaultValue: '',
     },
-    usercolor: {
-      type: DataTypes.STRING,
-      defaultValue: '#ffff',
-    },
     state: {
       type: DataTypes.ENUM,
       values: ['TODO', 'IN_PROGRESS', 'VERIFY', 'DONE'],

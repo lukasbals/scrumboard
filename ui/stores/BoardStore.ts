@@ -2,6 +2,7 @@ import { action, makeObservable, observable } from 'mobx';
 import { v4 as uuidv4 } from 'uuid';
 
 import fetchStories from '../api/fetchStories';
+import fetchUsers from '../api/fetchUsers';
 import createStory from '../api/createStory';
 import deleteStory from '../api/deleteStory';
 import updateStory from '../api/updateStory';
@@ -11,16 +12,20 @@ import deleteTask from '../api/deleteTask';
 
 import Story from '../models/Story';
 import Task from '../models/Task';
+import User from '../models/User';
+import genRandomColor from '../utils/genRandomColor';
 
 class BoardStore {
   stories: Story[] = [];
+  users: User[] = [];
   boardName = '';
 
   constructor(boardName: string) {
     makeObservable(this, {
       stories: observable,
+      users: observable,
       boardName: observable,
-      loadStories: action,
+      loadData: action,
       addStory: action,
       saveOrUpdateStory: action,
       removeNewStory: action,
@@ -34,11 +39,22 @@ class BoardStore {
     this.boardName = boardName;
   }
 
-  // Manage stories
+  // Load data
+
+  loadData = async (): Promise<void> => {
+    await this.loadUsers();
+    await this.loadStories();
+  };
 
   loadStories = async (): Promise<void> => {
     this.stories = await fetchStories(this.boardName);
   };
+
+  loadUsers = async (): Promise<void> => {
+    this.users = await fetchUsers(this.boardName);
+  };
+
+  // Manage stories
 
   addStory = (): void => {
     this.stories = [
@@ -88,7 +104,6 @@ class BoardStore {
         id: uuidv4(),
         state: 'TODO',
         type: `TODO-${storyId}`,
-        usercolor: '#e8e8d8',
         username: '',
         storyId,
         new: true,
@@ -109,14 +124,22 @@ class BoardStore {
     const story = this.findStory(task.storyId);
     let newOrUpdatedTask: Task;
     if (task.new) {
-      newOrUpdatedTask = await createTask(task, this.boardName);
+      newOrUpdatedTask = await createTask(
+        { ...task, usercolor: genRandomColor() },
+        this.boardName,
+      );
     } else {
-      newOrUpdatedTask = await updateTask(task, this.boardName);
+      newOrUpdatedTask = await updateTask(
+        // If the updated username is new on that board it needs a new color.
+        { ...task, usercolor: genRandomColor() },
+        this.boardName,
+      );
     }
     story.tasks = this.replaceTaskWithExistingOne(
       newOrUpdatedTask,
       story.tasks,
     );
+    await this.loadUsers();
     this.replaceStoryWithNewOne(story);
   };
 

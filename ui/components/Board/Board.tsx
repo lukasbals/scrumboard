@@ -1,6 +1,6 @@
 import { Typography } from 'antd';
 import { observer } from 'mobx-react';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Story from '../../models/Story';
 import BoardStore from '../../stores/BoardStore';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
@@ -10,10 +10,20 @@ import AddStory from '../AddStory';
 
 const Board: React.FC = () => {
   const store: BoardStore = useContext(BoardStoreContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    store.loadStories();
+    const loadData = async (): Promise<void> => {
+      await store.loadData();
+      setLoading(false);
+    };
+
+    loadData();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.tableContainer}>

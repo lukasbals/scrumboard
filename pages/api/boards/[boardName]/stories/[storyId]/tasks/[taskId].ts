@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Task from '../../../../../../../api/models/Task';
+import createUserIfNotExists from '../../../../../../../api/controllers/taskController';
 
 export default async (
   req: NextApiRequest,
@@ -18,6 +19,8 @@ export default async (
             where: { id: req.query.taskId, storyId: req.query.storyId },
           },
         );
+        await createUserIfNotExists(req, `${req.query.boardName}`);
+
         res.status(200).json(req.body);
       } catch (error) {
         res.status(400).json({ message: error.message });

@@ -4,7 +4,7 @@ type Task = {
   state: 'TODO' | 'IN_PROGRESS' | 'VERIFY' | 'DONE';
   type: string;
   username: string;
-  usercolor: string;
+  usercolor?: string;
   storyId: string;
   new?: boolean;
 };

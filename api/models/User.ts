@@ -18,7 +18,7 @@ User.init(
     },
     color: {
       type: DataTypes.STRING,
-      defaultValue: '#ffff',
+      defaultValue: '#ffffff',
     },
   },
   {

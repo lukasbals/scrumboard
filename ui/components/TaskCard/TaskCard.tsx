@@ -12,6 +12,7 @@ import { Input, Form, Button, Typography } from 'antd';
 import { useDrag } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
+import User from '../../models/User';
 
 type PropTypes = {
   task: Task;
@@ -27,6 +28,7 @@ const TaskCard: React.FC<PropTypes> = ({
   const store = useContext(BoardStoreContext);
 
   const [edit, setEdit] = useState(!!task.new);
+  const [user, setUser] = useState(null);
 
   const [{ opacity }, drag] = useDrag({
     item: task,
@@ -41,6 +43,12 @@ const TaskCard: React.FC<PropTypes> = ({
       form.getFieldInstance('description').focus();
     }
   }, [edit]);
+
+  useEffect(() => {
+    setUser(
+      store.users.find((u: User) => form.getFieldValue('user') === u.username),
+    );
+  }, [store.users]);
 
   const getUpdatedTask = (): Task => ({
     ...task,
@@ -115,7 +123,7 @@ const TaskCard: React.FC<PropTypes> = ({
           ) : (
             <div
               className={styles.nameBadge}
-              style={{ backgroundColor: task.usercolor }}
+              style={{ backgroundColor: user ? user.color : '#ffffff' }}
             >
               <Typography.Text>
                 {form.getFieldValue('user') ?? task.username}

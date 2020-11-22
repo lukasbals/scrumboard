@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Story from '../../../../../../../api/models/Story';
 import Task from '../../../../../../../api/models/Task';
+import createUserIfNotExists from '../../../../../../../api/controllers/taskController';
 
 export default async (
   req: NextApiRequest,
@@ -14,6 +15,8 @@ export default async (
           ...req.body,
           storyId: story.getDataValue('id'),
         });
+        await createUserIfNotExists(req, story.getDataValue('boardName'));
+
         res.status(202).json(task);
       } catch (error) {
         res.status(400).json({ message: error.message });
