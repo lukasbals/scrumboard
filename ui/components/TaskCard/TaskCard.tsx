@@ -28,7 +28,6 @@ const TaskCard: React.FC<PropTypes> = ({
   const store = useContext(BoardStoreContext);
 
   const [edit, setEdit] = useState(!!task.new);
-  const [user, setUser] = useState(null);
 
   const [{ opacity }, drag] = useDrag({
     item: task,
@@ -45,10 +44,8 @@ const TaskCard: React.FC<PropTypes> = ({
   }, [edit]);
 
   useEffect(() => {
-    setUser(
-      store.users.find((u: User) => form.getFieldValue('user') === u.username),
-    );
-  }, [store.users]);
+    form.setFieldsValue({ description: task.description, user: task.username });
+  }, [task]);
 
   const getUpdatedTask = (): Task => ({
     ...task,
@@ -61,6 +58,7 @@ const TaskCard: React.FC<PropTypes> = ({
     setEdit(false);
   };
 
+  const user = store.users.find((u: User) => task.username === u.username);
   return (
     <Form
       form={form}
@@ -109,9 +107,7 @@ const TaskCard: React.FC<PropTypes> = ({
             </Form.Item>
           ) : (
             <Typography.Text>
-              <ReactMarkdown>
-                {form.getFieldValue('description') ?? task.description}
-              </ReactMarkdown>
+              <ReactMarkdown>{task.description}</ReactMarkdown>
             </Typography.Text>
           )}
         </div>
@@ -125,9 +121,7 @@ const TaskCard: React.FC<PropTypes> = ({
               className={styles.nameBadge}
               style={{ backgroundColor: user ? user.color : '#ffffff' }}
             >
-              <Typography.Text>
-                {form.getFieldValue('user') ?? task.username}
-              </Typography.Text>
+              <Typography.Text>{task.username}</Typography.Text>
             </div>
           )}
         </div>

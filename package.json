@@ -4,9 +4,9 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "nodemon",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "cross-env NODE_ENV=production node dist/server/index.js",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
@@ -43,7 +43,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@types/socket.io": "^2.1.11",
     "antd": "^4.8.2",
+    "cross-env": "^7.0.3",
     "mobx": "^6.0.4",
     "mobx-react": "^7.0.5",
     "next": "latest",
@@ -55,6 +57,8 @@
     "react-dom": "^16.13.1",
     "react-markdown": "^5.0.3",
     "sequelize": "^6.3.5",
+    "socket.io": "^3.0.3",
+    "socket.io-client": "^3.0.3",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
@@ -75,8 +79,10 @@
     "jest": "^25.2.3",
     "jest-watch-typeahead": "^0.5.0",
     "lint-staged": "^10.0.10",
+    "nodemon": "^2.0.6",
     "prettier": "^2.0.2",
     "sass": "^1.29.0",
+    "ts-node": "^9.1.0",
     "typescript": "^3.8.3"
   }
 }

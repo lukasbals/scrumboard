@@ -7,6 +7,8 @@ import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 import TableRow from '../TableRow';
 import styles from './styles.module.scss';
 import AddStory from '../AddStory';
+import { io } from 'socket.io-client';
+import { WEBSOCKET_EVENTS } from '../../../constants';
 
 const Board: React.FC = () => {
   const store: BoardStore = useContext(BoardStoreContext);
@@ -19,6 +21,26 @@ const Board: React.FC = () => {
     };
 
     loadData();
+  }, []);
+
+  useEffect(() => {
+    const socket = io({ query: { boardName: store.boardName } });
+
+    socket.on('connect', () => {
+      console.log('Socket connected!');
+    });
+
+    WEBSOCKET_EVENTS.forEach((event) => {
+      socket.on(event.name, (message) => {
+        store[event.uiStoreFunction](message);
+      });
+    });
+
+    store.setSocket(socket);
+
+    return (): void => {
+      socket.close();
+    };
   }, []);
 
   if (loading) {
@@ -65,7 +87,7 @@ const Board: React.FC = () => {
           )}
         </tbody>
       </table>
-      <AddStory onClick={(): void => store.addStory()} />
+      <AddStory onClick={(): void => store.addEmptyStory()} />
     </div>
   );
 };

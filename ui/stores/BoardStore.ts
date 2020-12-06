@@ -1,5 +1,6 @@
-import { action, makeObservable, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { v4 as uuidv4 } from 'uuid';
+import { Socket } from 'socket.io-client';
 
 import fetchStories from '../api/fetchStories';
 import fetchUsers from '../api/fetchUsers';
@@ -19,25 +20,16 @@ class BoardStore {
   stories: Story[] = [];
   users: User[] = [];
   boardName = '';
+  socket: Socket = null;
 
   constructor(boardName: string) {
-    makeObservable(this, {
-      stories: observable,
-      users: observable,
-      boardName: observable,
-      loadData: action,
-      addStory: action,
-      saveOrUpdateStory: action,
-      removeNewStory: action,
-      deleteStory: action,
-      addTask: action,
-      saveOrUpdateTask: action,
-      removeNewTask: action,
-      deleteTask: action,
-      moveTask: action,
-    });
+    makeAutoObservable(this);
     this.boardName = boardName;
   }
+
+  setSocket = (socket: Socket): void => {
+    this.socket = socket;
+  };
 
   // Load data
 
@@ -56,7 +48,7 @@ class BoardStore {
 
   // Manage stories
 
-  addStory = (): void => {
+  addEmptyStory = (): void => {
     this.stories = [
       ...this.stories,
       {
@@ -70,6 +62,10 @@ class BoardStore {
     ];
   };
 
+  addStory = (story: Story): void => {
+    this.stories = [...this.stories, { ...story, tasks: [] }];
+  };
+
   replaceStoryWithNewOne = (story: Story): void => {
     this.stories = this.stories.map((s) => (s.id === story.id ? story : s));
   };
@@ -77,9 +73,11 @@ class BoardStore {
   saveOrUpdateStory = async (story: Story): Promise<void> => {
     if (story.new) {
       const newStory = await createStory(story);
+      this.socket.emit('ADD_STORY', newStory);
       this.replaceStoryWithNewOne({ ...newStory, tasks: [] });
     } else {
       const updatedStory = await updateStory(story);
+      this.socket.emit('UPDATE_STORY', updatedStory);
       this.replaceStoryWithNewOne(updatedStory);
     }
   };
@@ -90,12 +88,13 @@ class BoardStore {
 
   deleteStory = (storyId: string): void => {
     this.removeNewStory(storyId);
+    this.socket.emit('DELETE_STORY', storyId);
     deleteStory(storyId, this.boardName);
   };
 
   // Manage tasks
 
-  addTask = (storyId: string): void => {
+  addEmptyTask = (storyId: string): void => {
     const story = this.findStory(storyId);
     story.tasks = [
       ...story.tasks,
@@ -109,6 +108,15 @@ class BoardStore {
         new: true,
       },
     ];
+    this.replaceStoryWithNewOne(story);
+  };
+
+  addTask = async (task: Task): Promise<void> => {
+    const story = this.findStory(task.storyId);
+    story.tasks = [...story.tasks, task];
+
+    await this.loadUsers();
+
     this.replaceStoryWithNewOne(story);
   };
 
@@ -128,12 +136,14 @@ class BoardStore {
         { ...task, usercolor: genRandomColor() },
         this.boardName,
       );
+      this.socket.emit('ADD_TASK', newOrUpdatedTask);
     } else {
       newOrUpdatedTask = await updateTask(
         // If the updated username is new on that board it needs a new color.
         { ...task, usercolor: genRandomColor() },
         this.boardName,
       );
+      this.socket.emit('UPDATE_TASK', newOrUpdatedTask);
     }
     story.tasks = this.replaceTaskWithExistingOne(
       newOrUpdatedTask,
@@ -151,6 +161,7 @@ class BoardStore {
 
   deleteTask = (task: Task): void => {
     this.removeNewTask(task);
+    this.socket.emit('DELETE_TASK', task);
     deleteTask(task, this.boardName);
   };
 
@@ -164,7 +175,23 @@ class BoardStore {
     story.tasks = this.replaceTaskWithExistingOne(task, story.tasks);
     this.replaceStoryWithNewOne(story);
 
+    this.socket.emit('MOVE_TASK', task);
     updateTask(task, this.boardName, true);
+  };
+
+  websocketMoveTask = (task: Task): void => {
+    const story = this.findStory(task.storyId);
+    story.tasks = this.replaceTaskWithExistingOne(task, story.tasks);
+    this.replaceStoryWithNewOne(story);
+  };
+
+  websocketUpdateTask = async (task: Task): Promise<void> => {
+    const story = this.findStory(task.storyId);
+    story.tasks = this.replaceTaskWithExistingOne(task, story.tasks);
+
+    await this.loadUsers();
+
+    this.replaceStoryWithNewOne(story);
   };
 }
 

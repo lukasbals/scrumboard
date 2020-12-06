@@ -123,7 +123,7 @@ const TableRow: React.FC<PropTypes> = ({ story }: PropTypes) => {
             store.deleteStory(s.id);
           }}
           onAddTask={(): void => {
-            store.addTask(story.id);
+            store.addEmptyTask(story.id);
           }}
         />
       </td>

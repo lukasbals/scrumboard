@@ -14,3 +14,34 @@ export const verify = (storyId: string): string =>
 
 export const done = (storyId: string): string =>
   addStoryToType('DONE', storyId);
+
+export const WEBSOCKET_EVENTS = [
+  {
+    name: 'ADD_STORY',
+    uiStoreFunction: 'addStory',
+  },
+  {
+    name: 'UPDATE_STORY',
+    uiStoreFunction: 'replaceStoryWithNewOne',
+  },
+  {
+    name: 'DELETE_STORY',
+    uiStoreFunction: 'removeNewStory',
+  },
+  {
+    name: 'ADD_TASK',
+    uiStoreFunction: 'addTask',
+  },
+  {
+    name: 'UPDATE_TASK',
+    uiStoreFunction: 'websocketUpdateTask',
+  },
+  {
+    name: 'MOVE_TASK',
+    uiStoreFunction: 'websocketMoveTask',
+  },
+  {
+    name: 'DELETE_TASK',
+    uiStoreFunction: 'removeNewTask',
+  },
+];

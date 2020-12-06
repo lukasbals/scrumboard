@@ -34,6 +34,10 @@ const StoryCard: React.FC<PropTypes> = ({
     }
   }, [edit]);
 
+  useEffect(() => {
+    form.setFieldsValue(story);
+  }, [story]);
+
   const onSubmit = (): void => {
     onChange({ ...story, ...form.getFieldsValue() });
     setEdit(false);
@@ -58,14 +62,9 @@ const StoryCard: React.FC<PropTypes> = ({
           </>
         ) : (
           <>
-            <Typography.Title level={4}>
-              {form.getFieldValue('name') ?? story.name}
-            </Typography.Title>
+            <Typography.Title level={4}>{story.name}</Typography.Title>
             {story.link && (
-              <a
-                href={form.getFieldValue('link') ?? story.link}
-                target="__blank"
-              >
+              <a href={story.link} target="__blank">
                 Link
               </a>
             )}
