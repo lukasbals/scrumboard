@@ -19,10 +19,17 @@ Start local DB:
 ```bash
 docker run --rm --name postgres -e POSTGRES_PASSWORD=scrumboard -e POSTGRES_USER=scrumboard -p 5432:5432 -d postgres
 ```
+
 Install dependencies:
 
 ```bash
 yarn install
+```
+
+Setup the environment variales by copying the `.env.example` file:
+
+```bash
+cp .env.example .env.local
 ```
 
 Start development server:
@@ -33,6 +40,19 @@ yarn run dev
 
 Now the app should be available on [localhost:3000](http://localhost:3000). To create
 the database schema call [localhost:3000/api](http://localhost:3000/api) once.
+
+## Run on production
+
+Environment variales:
+
+- `NODE_ENV`: Should be set to `production` to run the [Next.js](https://nextjs.org)
+  app in production mode. (Recommended)
+- `DB_CONNECTION`: A connection string to a [PostgresSQL](https://www.postgresql.org)
+  database. (Required)
+  Example: `postgres://scrumboard:scrumboard@localhost:5432/postgres`
+- `BASIC_AUTH`: Secure all endpoints of the application using
+  [Basic auth](https://tools.ietf.org/html/rfc7617). (Optional)
+  Example: `user:password`
 
 Build the project:
 

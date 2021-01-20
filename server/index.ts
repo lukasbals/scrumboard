@@ -1,8 +1,12 @@
-import { createServer } from 'http';
+import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { parse } from 'url';
 import next from 'next';
 import { Server, Socket } from 'socket.io';
 import { WEBSOCKET_EVENTS } from '../constants';
+import dotenv from 'dotenv';
+import basicAuth from './basicAuth';
+
+dotenv.config();
 
 const port = parseInt(process.env.PORT || '3000', 10);
 const dev = process.env.NODE_ENV !== 'production';
@@ -10,7 +14,12 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
-  const server = createServer((req, res) => {
+  const server = createServer((req: IncomingMessage, res: ServerResponse) => {
+    if (process.env.BASIC_AUTH && !basicAuth(req, res)) {
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const parsedUrl = parse(req.url!, true);
     const { pathname, query } = parsedUrl;
 

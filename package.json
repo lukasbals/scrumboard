@@ -45,7 +45,9 @@
     "@ant-design/icons": "^4.3.0",
     "@types/socket.io": "^2.1.11",
     "antd": "^4.8.2",
+    "basic-auth": "^2.0.1",
     "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
     "mobx": "^6.0.4",
     "mobx-react": "^7.0.5",
     "next": "latest",
@@ -59,6 +61,7 @@
     "sequelize": "^6.3.5",
     "socket.io": "^3.0.3",
     "socket.io-client": "^3.0.3",
+    "tsscmp": "^1.0.6",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
