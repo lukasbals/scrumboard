@@ -26,7 +26,7 @@ Install dependencies:
 yarn install
 ```
 
-Setup the environment variales by copying the `.env.example` file:
+Setup the environment variales for dev by copying the `.env.example` file:
 
 ```bash
 cp .env.example .env.local
@@ -41,12 +41,21 @@ yarn run dev
 Now the app should be available on [localhost:3000](http://localhost:3000). To create
 the database schema call [localhost:3000/api](http://localhost:3000/api) once.
 
+### Dev tools used:
+
+- [Typescript](https://www.typescriptlang.org/)
+- Linting with [ESLint](https://eslint.org/)
+- Formatting with [Prettier](https://prettier.io/)
+- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
+- Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
+
 ## Run on production
 
 Environment variales:
 
-- `NODE_ENV`: Should be set to `production` to run the [Next.js](https://nextjs.org)
-  app in production mode. (Recommended)
+- `NODE_ENV`: Run [Next.js](https://nextjs.org) in production mode if set to
+  `production`. (Recommended)
+
 - `DB_CONNECTION`: A connection string to a [PostgresSQL](https://www.postgresql.org)
   database. (Required)
 
@@ -57,9 +66,10 @@ Environment variales:
 
   Example: `user:password`
 
-Build the project:
+Install dependencies and build the project:
 
 ```bash
+yarn install
 yarn build
 ```
 
@@ -69,18 +79,10 @@ Run build on a server:
 yarn start
 ```
 
-### Dev tools used:
-
-- [Typescript](https://www.typescriptlang.org/)
-- Linting with [ESLint](https://eslint.org/)
-- Formatting with [Prettier](https://prettier.io/)
-- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
-- Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
-
 ## Contributing
 
 Thanks for your interest in Scrumboard! You are very welcome to contribute. Just follow
-the [debelopment guide](#development) and open a PR. Also, reporting and upvoting issues
+the [development guide](#development) and open a PR. Also, reporting and upvoting issues
 is highly appreciated.
 
 ## Features/Todo
