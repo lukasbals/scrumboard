@@ -49,9 +49,12 @@ Environment variales:
   app in production mode. (Recommended)
 - `DB_CONNECTION`: A connection string to a [PostgresSQL](https://www.postgresql.org)
   database. (Required)
+
   Example: `postgres://scrumboard:scrumboard@localhost:5432/postgres`
+
 - `BASIC_AUTH`: Secure all endpoints of the application using
   [Basic auth](https://tools.ietf.org/html/rfc7617). (Optional)
+
   Example: `user:password`
 
 Build the project:
