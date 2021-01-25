@@ -2,9 +2,11 @@
 
 The simplest task tracking tool for dev teams.
 
+[![Actions Status](https://github.com/lukasbals/scrumboard/workflows/Tests/badge.svg?branch=main)](https://github.com/lukasbals/scrumboard/actions)
+
 ![Scrumboard](scrumboard.gif)
 
-## Technologies used
+## ⚙️  Technologies used
 
 - [Next.js](https://nextjs.org)
 - [Socket.io](https://socket.io)
@@ -12,7 +14,7 @@ The simplest task tracking tool for dev teams.
 - [MobX](https://mobx.js.org/README.html)
 - [Sequelize](https://sequelize.org)
 
-## Development
+## 👩‍💻 Development
 
 Start local DB:
 
@@ -49,7 +51,7 @@ the database schema call [localhost:3000/api](http://localhost:3000/api) once.
 - Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
 - Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
 
-## Run on production
+## 🏃‍♀️Run on production
 
 Environment variales:
 
@@ -79,13 +81,13 @@ Run build on a server:
 yarn start
 ```
 
-## Contributing
+## 🧩 Contributing
 
 Thanks for your interest in Scrumboard! You are very welcome to contribute. Just follow
 the [development guide](#development) and open a PR. Also, reporting and upvoting issues
 is highly appreciated.
 
-## Features/Todo
+## 🎉 Features/Todo
 
 - [x] Markdown support
 - [ ] Manage user colors
