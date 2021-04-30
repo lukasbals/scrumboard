@@ -1,4 +1,4 @@
-# Scrumboard
+# 🗒️ Scrumboard
 
 The simplest task tracking tool for dev teams.
 
