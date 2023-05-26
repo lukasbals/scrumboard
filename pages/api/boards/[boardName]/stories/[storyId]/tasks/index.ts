@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Story from '../../../../../../../api/models/Story';
-import Task from '../../../../../../../api/models/Task';
-import createUserIfNotExists from '../../../../../../../api/controllers/taskController';
+import Story from '../../../../../../../_api/models/Story';
+import Task from '../../../../../../../_api/models/Task';
+import createUserIfNotExists from '../../../../../../../_api/controllers/taskController';
 
 export default async (
   req: NextApiRequest,
