@@ -5,7 +5,7 @@ let sequelize: Sequelize = null;
 const getSequelize = (): Sequelize => {
   if (sequelize) return sequelize;
 
-  sequelize = new Sequelize(process.env.DB_CONNECTION);
+  sequelize = new Sequelize(process.env.POSTGRES_URL, { ssl: true });
   return sequelize;
 };
 

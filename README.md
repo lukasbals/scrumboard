@@ -58,7 +58,7 @@ Environment variales:
 - `NODE_ENV`: Run [Next.js](https://nextjs.org) in production mode if set to
   `production`. (Recommended)
 
-- `DB_CONNECTION`: A connection string to a [PostgresSQL](https://www.postgresql.org)
+- `POSTGRES_URL`: A connection string to a [PostgresSQL](https://www.postgresql.org)
   database. (Required)
 
   Example: `postgres://scrumboard:scrumboard@localhost:5432/postgres`
