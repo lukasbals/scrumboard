@@ -6,6 +6,7 @@ const getSequelize = (): Sequelize => {
   if (sequelize) return sequelize;
 
   sequelize = new Sequelize(process.env.POSTGRES_URL, {
+    dialectModule: require('pg'),
     dialectOptions:
       process.env.NODE_ENV === 'production'
         ? {
