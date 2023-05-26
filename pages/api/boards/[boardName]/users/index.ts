@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import User from '../../../../../api/models/User';
+import User from '../../../../../_api/models/User';
 
 export default async (
   req: NextApiRequest,

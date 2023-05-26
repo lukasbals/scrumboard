@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Board from '../../../api/models/Board';
+import Board from '../../../_api/models/Board';
 import { boardNameRegex } from '../../../constants';
 
 export default async (

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Board from '../../../../../api/models/Board';
-import Story from '../../../../../api/models/Story';
-import Task from '../../../../../api/models/Task';
+import Board from '../../../../../_api/models/Board';
+import Story from '../../../../../_api/models/Story';
+import Task from '../../../../../_api/models/Task';
 
 export default async (
   req: NextApiRequest,
