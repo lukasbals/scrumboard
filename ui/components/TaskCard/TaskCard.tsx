@@ -7,12 +7,13 @@ import {
   EditOutlined,
   SaveOutlined,
 } from '@ant-design/icons';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Input, Form, Button, Typography } from 'antd';
-import { useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
 import User from '../../models/User';
+import React from 'react';
 
 type PropTypes = {
   task: Task;
@@ -30,12 +31,21 @@ const TaskCard: React.FC<PropTypes> = ({
   const [edit, setEdit] = useState(!!task.new);
 
   const [{ opacity }, drag] = useDrag({
+    type: 'TASK',
     item: task,
     canDrag: (): boolean => !edit,
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   });
+
+  const dragRef = useRef<HTMLTableCellElement>(null);
+
+  React.useEffect(() => {
+    if (dragRef.current) {
+      drag(dragRef.current);
+    }
+  }, [dragRef]);
 
   useEffect(() => {
     if (edit) {
@@ -65,7 +75,7 @@ const TaskCard: React.FC<PropTypes> = ({
       initialValues={{ description: task.description, user: task.username }}
       onFinish={onSubmit}
     >
-      <div ref={drag} className={styles.taskContainer} style={{ opacity }}>
+      <div ref={dragRef} className={styles.taskContainer} style={{ opacity }}>
         <div className={styles.taskHeader}>
           {edit ? (
             <ActionIcons

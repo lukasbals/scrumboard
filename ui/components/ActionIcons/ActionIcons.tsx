@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import styles from './styles.module.scss';
 
 type PropTypes = {

@@ -21,7 +21,7 @@ const createBoard = async (values: FormValues): Promise<Board> => {
     return board;
   }
   message.error(
-    'Some error occurred while creating your board. Please try again.',
+    'Some error occurred while creating your board. Please try again.'
   );
   return null;
 };

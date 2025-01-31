@@ -26,7 +26,7 @@ User.init(
     modelName: 'user',
     tableName: 'user',
     paranoid: true,
-  },
+  }
 );
 
 export default User;

@@ -43,7 +43,7 @@ app.prepare().then(() => {
     WEBSOCKET_EVENTS.forEach((event) => {
       socket.on(event.name, (message) => {
         if (boardName) {
-          socket.to(boardName).broadcast.emit(event.name, message);
+          socket.to(boardName).emit(event.name, message);
         }
       });
     });
@@ -53,6 +53,6 @@ app.prepare().then(() => {
   console.log(
     `> Server listening at http://localhost:${port} as ${
       dev ? 'development' : process.env.NODE_ENV
-    }`,
+    }`
   );
 });

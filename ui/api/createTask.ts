@@ -9,7 +9,7 @@ const createTask = async (task: Task, boardName: string): Promise<Task> => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task),
-    },
+    }
   );
   message.destroy();
   if (response.status === 202) {
@@ -18,7 +18,7 @@ const createTask = async (task: Task, boardName: string): Promise<Task> => {
     return task;
   }
   message.error(
-    'Some error occurred while creating your task. Please try again.',
+    'Some error occurred while creating your task. Please try again.'
   );
   return null;
 };

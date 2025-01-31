@@ -7,7 +7,7 @@ const fetchUsers = async (boardName: string): Promise<User[]> => {
     return await response.json();
   }
   message.error(
-    'Some error occurred while fetching your boards users. Please try again.',
+    'Some error occurred while fetching your boards users. Please try again.'
   );
   return null;
 };

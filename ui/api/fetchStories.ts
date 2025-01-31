@@ -7,7 +7,7 @@ const fetchStories = async (boardName: string): Promise<Story[]> => {
     return await response.json();
   }
   message.error(
-    'Some error occurred while fetching your stories. Please try again.',
+    'Some error occurred while fetching your stories. Please try again.'
   );
   return null;
 };

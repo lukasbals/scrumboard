@@ -1,6 +1,6 @@
 import { Typography } from 'antd';
 import { observer } from 'mobx-react';
-import { useContext, useEffect, useState } from 'react';
+import { JSX, useContext, useEffect, useState } from 'react';
 import Story from '../../models/Story';
 import BoardStore from '../../stores/BoardStore';
 import { BoardStoreContext } from '../../contexts/BoardStoreContext';
@@ -83,7 +83,7 @@ const Board: React.FC = () => {
           {store.stories.map(
             (story: Story): JSX.Element => (
               <TableRow key={story.id} story={story} />
-            ),
+            )
           )}
         </tbody>
       </table>
