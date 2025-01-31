@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -24,4 +24,3 @@ jobs:
         run: yarn run lint
       - name: Run tests
         run: yarn test
-

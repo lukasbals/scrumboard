@@ -5,7 +5,7 @@ import Task from '../../../../../_api/models/Task';
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   switch (req.method) {
     case 'GET':

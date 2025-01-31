@@ -18,7 +18,7 @@ const BoardNameForm: React.FC<PropTypes> = ({ onSubmit }: PropTypes) => {
 
   const validateBoardName = async (
     rules: object,
-    value: string,
+    value: string
   ): Promise<void> => {
     setExistingBoard(false);
     setValid(false);
@@ -31,7 +31,7 @@ const BoardNameForm: React.FC<PropTypes> = ({ onSubmit }: PropTypes) => {
           Board name needs to be URL safe
           <br />
           Example: my-board-1
-        </span>,
+        </span>
       );
     }
     const { status } = await fetch(`/api/boards/${value}`);

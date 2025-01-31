@@ -27,7 +27,7 @@ Story.init(
     tableName: 'story',
     indexes: [{ unique: true, fields: ['id'] }],
     paranoid: true,
-  },
+  }
 );
 
 Story.hasMany(Task);

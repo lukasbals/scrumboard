@@ -9,7 +9,7 @@ const updateStory = async (story: Story): Promise<Story> => {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(story),
-    },
+    }
   );
   message.destroy();
   if (response.status === 200) {
@@ -18,7 +18,7 @@ const updateStory = async (story: Story): Promise<Story> => {
     return story;
   }
   message.error(
-    'Some error occurred while updating your story. Please try again.',
+    'Some error occurred while updating your story. Please try again.'
   );
   return null;
 };

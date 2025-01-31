@@ -4,7 +4,7 @@ import createUserIfNotExists from '../../../../../../../_api/controllers/taskCon
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   switch (req.method) {
     case 'PUT':
@@ -17,7 +17,7 @@ export default async (
           },
           {
             where: { id: req.query.taskId, storyId: req.query.storyId },
-          },
+          }
         );
         await createUserIfNotExists(req, `${req.query.boardName}`);
 

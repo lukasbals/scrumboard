@@ -2,7 +2,7 @@ import { message } from 'antd';
 
 const deleteStory = async (
   storyId: string,
-  boardName: string,
+  boardName: string
 ): Promise<void> => {
   message.info('Deleting story ...');
   const response = await fetch(`/api/boards/${boardName}/stories/${storyId}`, {
@@ -14,7 +14,7 @@ const deleteStory = async (
     return;
   }
   message.error(
-    'Some error occurred while deleting your story. Please try again.',
+    'Some error occurred while deleting your story. Please try again.'
   );
 };
 

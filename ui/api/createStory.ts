@@ -15,7 +15,7 @@ const createStory = async (story: Story): Promise<Story> => {
     return story;
   }
   message.error(
-    'Some error occurred while creating your story. Please try again.',
+    'Some error occurred while creating your story. Please try again.'
   );
   return null;
 };

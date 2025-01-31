@@ -6,7 +6,7 @@ The simplest task tracking tool for dev teams.
 
 ![Scrumboard](scrumboard.gif)
 
-## ⚙️  Technologies used
+## ⚙️ Technologies used
 
 - [Next.js](https://nextjs.org)
 - [Socket.io](https://socket.io)

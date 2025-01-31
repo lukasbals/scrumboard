@@ -23,7 +23,7 @@ Board.init(
     tableName: 'board',
     indexes: [{ unique: true, fields: ['name'] }],
     paranoid: true,
-  },
+  }
 );
 
 Board.hasMany(Story);
