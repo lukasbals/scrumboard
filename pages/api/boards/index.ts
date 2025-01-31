@@ -4,7 +4,7 @@ import { boardNameRegex } from '../../../constants';
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   switch (req.method) {
     case 'POST':

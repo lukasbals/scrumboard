@@ -4,7 +4,7 @@ import Task from '../models/Task';
 const updateTask = async (
   task: Task,
   boardName: string,
-  muted = false,
+  muted = false
 ): Promise<Task> => {
   !muted && message.info('Updating task ...');
   const response = await fetch(
@@ -13,7 +13,7 @@ const updateTask = async (
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task),
-    },
+    }
   );
   message.destroy();
   if (response.status === 200) {
@@ -22,7 +22,7 @@ const updateTask = async (
     return task;
   }
   message.error(
-    'Some error occurred while updating your task. Please try again.',
+    'Some error occurred while updating your task. Please try again.'
   );
   return null;
 };

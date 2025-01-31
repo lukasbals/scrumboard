@@ -1,4 +1,20 @@
-import '@testing-library/jest-dom';
+require('@testing-library/jest-dom');
+import { useRouter } from 'next/router';
+
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
+}));
+
+const mockedUseRouter = useRouter as jest.Mock;
+
+beforeEach(() => {
+  mockedUseRouter.mockReturnValue({
+    route: '/',
+    pathname: '/',
+    query: {},
+    asPath: '/',
+  });
+});
 
 global.fetch = jest.fn();
 

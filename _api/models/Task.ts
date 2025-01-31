@@ -31,7 +31,7 @@ Task.init(
     tableName: 'task',
     indexes: [{ unique: true, fields: ['id'] }],
     paranoid: true,
-  },
+  }
 );
 
 export default Task;

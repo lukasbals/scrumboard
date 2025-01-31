@@ -25,7 +25,7 @@ export const Home: React.FC = () => {
       <div className={styles.divider} />
 
       <Typography.Paragraph type="secondary">
-        Craete new or access existing board
+        Create new or access existing board
       </Typography.Paragraph>
       <div className={styles.formContainer}>
         <BoardNameForm onSubmit={onSubmit} />

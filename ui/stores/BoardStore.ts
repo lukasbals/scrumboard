@@ -134,20 +134,20 @@ class BoardStore {
     if (task.new) {
       newOrUpdatedTask = await createTask(
         { ...task, usercolor: genRandomColor() },
-        this.boardName,
+        this.boardName
       );
       this.socket.emit('ADD_TASK', newOrUpdatedTask);
     } else {
       newOrUpdatedTask = await updateTask(
         // If the updated username is new on that board it needs a new color.
         { ...task, usercolor: genRandomColor() },
-        this.boardName,
+        this.boardName
       );
       this.socket.emit('UPDATE_TASK', newOrUpdatedTask);
     }
     story.tasks = this.replaceTaskWithExistingOne(
       newOrUpdatedTask,
-      story.tasks,
+      story.tasks
     );
     await this.loadUsers();
     this.replaceStoryWithNewOne(story);
@@ -167,7 +167,7 @@ class BoardStore {
 
   moveTask = (
     task: Task,
-    newState: 'TODO' | 'IN_PROGRESS' | 'VERIFY' | 'DONE',
+    newState: 'TODO' | 'IN_PROGRESS' | 'VERIFY' | 'DONE'
   ): void => {
     const story = this.findStory(task.storyId);
     task.state = newState;

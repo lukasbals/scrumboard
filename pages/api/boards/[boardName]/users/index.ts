@@ -3,7 +3,7 @@ import User from '../../../../../_api/models/User';
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   switch (req.method) {
     case 'GET':

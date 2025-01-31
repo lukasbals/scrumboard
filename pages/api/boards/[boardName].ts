@@ -3,7 +3,7 @@ import Board from '../../../_api/models/Board';
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   if (req.method === 'GET') {
     const board = await Board.findOne({

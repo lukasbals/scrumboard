@@ -10,7 +10,7 @@ type UserType = {
 
 const createUserIfNotExists = async (
   req: NextApiRequest,
-  boardName: string,
+  boardName: string
 ): Promise<void> => {
   const board = await Board.findOne({
     where: { name: boardName },

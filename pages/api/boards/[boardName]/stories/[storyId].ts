@@ -4,7 +4,7 @@ import Task from '../../../../../_api/models/Task';
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   switch (req.method) {
     case 'PUT':
@@ -13,7 +13,7 @@ export default async (
           { name: req.body.name, link: req.body.link },
           {
             where: { id: req.query.storyId, boardName: req.query.boardName },
-          },
+          }
         );
         res.status(200).json(req.body);
       } catch (error) {

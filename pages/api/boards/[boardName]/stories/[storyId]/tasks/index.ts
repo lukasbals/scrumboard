@@ -5,7 +5,7 @@ import createUserIfNotExists from '../../../../../../../_api/controllers/taskCon
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   switch (req.method) {
     case 'POST':

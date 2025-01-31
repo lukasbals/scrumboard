@@ -7,7 +7,7 @@ const deleteTask = async (task: Task, boardName: string): Promise<void> => {
     `/api/boards/${boardName}/stories/${task.storyId}/tasks/${task.id}`,
     {
       method: 'DELETE',
-    },
+    }
   );
   message.destroy();
   if (response.status === 200) {
@@ -15,7 +15,7 @@ const deleteTask = async (task: Task, boardName: string): Promise<void> => {
     return;
   }
   message.error(
-    'Some error occurred while deleting your task. Please try again.',
+    'Some error occurred while deleting your task. Please try again.'
   );
 };
 
